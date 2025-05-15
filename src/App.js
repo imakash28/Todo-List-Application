@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import './App.css';
+import TodoForm from './components/TodoForm.js';
+import TodoList from './components/TodoList.js';
 
 
 const App = () => {
@@ -51,23 +53,8 @@ const handleEdit = (id) => {
 return <div className="App">
 <div className="container">
   <h1>Todo List App</h1>
-  <form className="todoForm" onSubmit={handleSubmit}>
-    <input type="text" 
-    value={todo}
-    onChange={(e) => setTodo(e.target.value)}/>
-    <button>{editId ? "Edit" : "Go"}</button>
-  </form>
-  <ul className="allTodos">
-    {
-      todos.map((t) => (
-        <li className="singleTodo">
-        <span className="todoText" key={t.id}>{t.todo}</span>
-        <button onClick={() => handleEdit(t.id)}>Edit</button>
-        <button onClick={() => handleDelete(t.id)}>Delete</button>
-    </li>
-      ))
-    }
-  </ul>
+ <TodoForm handleSubmit={handleSubmit} todo={todo} editId={editId} setTodo={setTodo}/>
+ <TodoList handleDelete={handleDelete} todos={todos} handleEdit={handleEdit}/>
 </div>
 </div>
 };
